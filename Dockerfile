@@ -12,5 +12,7 @@ RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90nouser && \
         >> /etc/apt/sources.list && \
     apt-get update -qq && \
     DEBIAN_FRONTEND=noniteractive apt-get install -y --no-install-recommends \
-        clang-8 gcc-9 git libicu-dev make ssh tcl8.6-dev && \
-    dpkg-reconfigure --frontend noninteractive tzdata
+        clang-8 gcc-9 git libicu-dev make pkg-config ssh tcl8.6-dev && \
+    dpkg-reconfigure --frontend noninteractive tzdata && \
+    useradd ci --create-home --user-group
+USER ci
